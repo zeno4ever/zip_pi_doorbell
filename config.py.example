@@ -1,0 +1,4 @@
+# setup for your jitsi server
+chaturl =   f"https://yourjitsiserver.com%s#config.prejoinConfig.enabled=false"
+telegram_token = 'yourbottoken'
+telegram_chat = channel number

@@ -1,0 +1,6 @@
+[Desktop Entry]
+Name=Doorbell
+Exec=/home/zeno/deurbel/doorbell.py
+Path=/home/zeno/deurbel/
+Type=Application
+Terminal=true
