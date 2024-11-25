@@ -1,6 +1,6 @@
 [Desktop Entry]
 Name=Doorbell
-Exec=/home/zeno/deurbel/doorbell.py
-Path=/home/zeno/deurbel/
+Exec=/home/pi/deurbel/doorbell.py
+Path=/home/pi/deurbel/
 Type=Application
 Terminal=true
