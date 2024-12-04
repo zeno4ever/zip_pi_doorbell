@@ -6,7 +6,7 @@ Created for "Workshop: Build your Own Smart Doorbell" workshop [ZIP media Lab Ro
 ## Needed hardware
 
 - Raspberry Pi 5 (tested with 4 & 5)
-- Power adapter (Pi is picky about this so buy the right one.)
+- Power adapter (Pi is icky about this so buy the right one.)
 - microSD card for OS, minimal 16GB type A1 or better
 - Pi Camera (with Pi5 cable)
 - USB External speaker (that acts like a soundcard, so no 3,5mm plug!)
@@ -114,6 +114,7 @@ Reboot the pi and wait until its fully booted. Pres the button and enjoy your ow
 
 # Commen mistakes 
 
+If you can't hear sound probaly your volume is to low. You can change this via desktop upper right speaker symbol.  Alternative you can use the 'alsamixer' command.
 
 # Pi4 speaker alternative
 Instead of a USB sound card you can use - Adafruit STEMMA Speaker (ada3885) and 3 pin JST cable with female pin connectors.
