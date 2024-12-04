@@ -9,7 +9,7 @@ Created for "Workshop: Build your Own Smart Doorbell" workshop [ZIP media Lab Ro
 - Power adapter (Pi is picky about this so buy the right one.)
 - microSD card for OS, minimal 16GB type A1 or better
 - Pi Camera (with Pi5 cable)
-- USB External speaker (that acts like a soundcard)
+- USB External speaker (that acts like a soundcard, so no 3,5mm plug!)
 - a button
 - LED
 - 430 Ohm resistor (for led)
@@ -29,37 +29,44 @@ You use the flex cable to connect your camera to your pi, follow the instruction
 
 We use telegram messages to give you realtime update that someone is standing on the door. 
 
-First create a new telegram channel where you want to recieve the door notifications. If you want to hear updates enable (sound) notifications for this channel.
+First create a new private telegram channel where you want to recieve the door notifications. If you want to hear updates enable (sound) notifications for this channel.
 
 ### Get your API Token
 
 Get your personal bot token via these [steps](https://core.telegram.org/bots/features#creating-a-new-bot) and save the bot token. 
 
-Add you telegram bot to your channel.
+Add you telegram bot to your channel. (on your phone)
 
 ### Channel ID
 
-Log in with your account to Telegram web and select the Telegram group. Then, in the URL of your web browser you should see something similar to https://web.telegram.org/k/#-XXXXXXXXX. Then, the ID you need to use for the Telegram group is -XXXXXXXXX, where each X character represents a number. Remember to include the minus symbol preceding the numbers.
+Log in with your account to [Telegram web](https://web.telegram.org) and select the Telegram group. Then, in the URL of your web browser you should see something similar to https://web.telegram.org/k/#-XXXXXXXXX. Then, the ID you need to use for the Telegram group is -XXXXXXXXX, where each X character represents a number. Remember to include the minus symbol preceding the numbers.
+
+We included a 'test_telegram.py' programm to test and find the right channel number (sometimes the above methode don't give the right number).
 
 
 ## Setup Pi
 Make image for your pi with [Pi Imager](https://www.raspberrypi.com/software/), select the correct hardware and "Raspberry Pi OS (64-bit)" as image to create. Select your SD card and wait until the imager is done.
 
-Put the SD card in your Pi and turn it on. 
+Put the SD card in your Pi and turn it on.  After a quick automatic reboot the pi is ready for use. 
 
 ## Pi doorbell scripts
 Install the workshop software by opening a terminal on the Pi and clone this repositry to your own local system with :
 
 `git clone https://github.com/zeno4ever/zip_pi_doorbell`
 
-copy 'config.py.example' to 'config.py'.
+copy 'config.py.example' to 'config.py' with the 'cp' command :
+`cp config.py.example config.py`
+
 
 ## Change config.py 
-Fill in the parameter you got in the steps from telegram
+Fill in the parameters you got in the steps from telegram. For the jitsi change the url   part 'your_channel' to your own variation.
 
 chaturl -  f"https://meet.hack42.nl/your_channel#config.prejoinConfig.enabled=false" 
 telegram_token - bot API token
 telegram_chat - channel id of channel of the door
+
+## modify home directiory in scripts
+In the script 'doorbell.py' and 'doorbell.desktop' you have to fill in your own home directory if you user name is different then 'pi'. Look for '/home/pi' and replace 'pi' with your own user name.
 
 # GPIO header pins
 
@@ -99,7 +106,7 @@ Create the autostart directory this will not exist on a new system.
 
 In the 'doorbell.desktop' change the paths to the directory where to script is. Move file 'doorbell.desktop' to ~.config/autostart/
 
-`mv 'doorbell.desktop' ~.config/autostart/`
+`mv doorbell.desktop ~.config/autostart/`
 
 In the 'doorbell.desktop' is a path to your homedirectory. Default we asume this is user 'pi', if this is diferent change it accordingly.
 

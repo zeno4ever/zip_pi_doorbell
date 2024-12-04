@@ -17,12 +17,10 @@ led = LED(14)
 def door_ring():
     print("Doorbel Ringing")
     send_notification(chaturl)
-    #env = os.environ.copy()
-    subprocess.Popen(["aplay", "/home/zeno/zip_pi_doorbell/dingdong.wav"])
+    subprocess.Popen(["aplay","-q","/home/pi/zip_pi_doorbell/dingdong.wav"])
     process = None
     led.blink()
     if not process or not chaturl:
-        print("Open url : ",chaturl)
         process = subprocess.Popen(["firefox", chaturl])
     else:
         print("Can't start video chat -- already started or missing chat id")
@@ -31,7 +29,6 @@ def door_ring():
     time.sleep(100) #video time in seconds
     if process :
         process.terminate()
-    print("....End")
     led.off()
 
 def send_notification(msg):
@@ -39,9 +36,7 @@ def send_notification(msg):
     data = {'chat_id': telegram_chat, 'text': '<a href="'+msg+'">There is someone at the door</a>', 'parse_mode': 'HTML','disable_web_page_preview':True}
     response = requests.post(url, data=data)
 
-    if response.status_code == 200:
-        print("Telegram message sent url:"+msg)
-    else:
+    if response.status_code != 200:
         print("Failed to send Telegram message. Status code:"+ str(response.status_code))
 
 def waitforbell():
