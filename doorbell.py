@@ -9,18 +9,18 @@ import signal
 import subprocess
 import requests
 from uuid import uuid4
-from config import telegram_token,telegram_chat
+from config import telegram_token,telegram_chat,userid,url
 from gpiozero import Button, LED
 
 doorbell = Button(26,bounce_time=0.2)
 led = LED(14)
 
-chaturl =   f"https://meet.hack42.nl/zipdoorbell-{uuid4()}#config.prejoinConfig.enabled=false" 
+chaturl = url.format(uuid4())
 
 def door_ring():
     print("Doorbel Ringing")
     send_notification(chaturl)
-    subprocess.Popen(["aplay","-q","/home/pi/zip_pi_doorbell/dingdong.wav"])
+    subprocess.Popen(["aplay","-q",f"/home/{userid}/zip_pi_doorbell/dingdong.wav"])
     process = None
     led.blink()
     if not process or not chaturl:
