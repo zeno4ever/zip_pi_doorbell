@@ -61,7 +61,6 @@ copy 'config.py.example' to 'config.py' with the 'cp' command :
 ## Change config.py 
 Fill in the parameters you got in the steps from telegram. For the jitsi change the url   part 'your_channel' to your own variation.
 
-chaturl -  f"https://meet.hack42.nl/your_channel#config.prejoinConfig.enabled=false" 
 telegram_token - bot API token
 telegram_chat - channel id of channel of the door
 

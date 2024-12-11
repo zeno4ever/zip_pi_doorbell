@@ -8,11 +8,14 @@ import time
 import signal
 import subprocess
 import requests
+from uuid import uuid4
 from config import chaturl,telegram_token,telegram_chat
 from gpiozero import Button, LED
 
 doorbell = Button(26,bounce_time=0.2)
 led = LED(14)
+
+chaturl =   f"https://meet.hack42.nl/zipdoorbell-{uuid4()}#config.prejoinConfig.enabled=false" 
 
 def door_ring():
     print("Doorbel Ringing")
