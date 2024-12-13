@@ -1,4 +1,4 @@
 telegram_token = 'yourbottoken'
-telegram_chat = -1 #channel number
+telegram_chat = channel number
 userid = 'pi'
-url =  "https://meetme.bit.nl/zipdoorbell-{}#config.prejoinConfig.enabled=false" 
+url =  "https://meetme.bit.nl/zipdoorbell-{your_channel}#config.prejoinConfig.enabled=false"
