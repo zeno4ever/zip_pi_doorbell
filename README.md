@@ -5,49 +5,25 @@ Created for "Workshop: Build your Own Smart Doorbell" workshop [ZIP media Lab Ro
 
 ## Needed hardware
 
+Find the tutorial with pictures here: https://www.instructables.com/Smart-Doorbell-Using-Raspberry-Pi-5-Jitsi-Telegram/ 
+
 - Raspberry Pi 5 (tested with 4 & 5)
 - Power adapter (Pi is icky about this so buy the right one.)
 - microSD card for OS, minimal 16GB type A1 or better
 - Pi Camera (with Pi5 cable)
 - USB External speaker (that acts like a soundcard, so no 3,5mm plug!)
+- USB Microphone
 - a button
 - LED
-- 430 Ohm resistor (for led)
+- 150 Ohm resistor (for led)
 - wires to led and button
 
-# Hardware
-
-
-
 # Installation
-
-## Camera
-You use the flex cable to connect your camera to your pi, follow the instructions on their site. The rasberry pi  automatic recognise this.
-
-
-## Setup Telegram
-
-We use telegram messages to give you realtime update that someone is standing on the door. 
-
-First create a new private telegram channel where you want to recieve the door notifications. If you want to hear updates enable (sound) notifications for this channel.
-
-### Get your API Token
-
-Get your personal bot token via these [steps](https://core.telegram.org/bots/features#creating-a-new-bot) and save the bot token. 
-
-Add you telegram bot to your channel. (on your phone)
-
-### Channel ID
-
-Log in with your account to [Telegram web](https://web.telegram.org) and select the Telegram group. Then, in the URL of your web browser you should see something similar to https://web.telegram.org/k/#-XXXXXXXXX. Then, the ID you need to use for the Telegram group is -XXXXXXXXX, where each X character represents a number. Remember to include the minus symbol preceding the numbers.
-
-We included a 'test_telegram.py' programm to test and find the right channel number (sometimes the above methode don't give the right number).
-
 
 ## Setup Pi
 Make image for your pi with [Pi Imager](https://www.raspberrypi.com/software/), select the correct hardware and "Raspberry Pi OS (64-bit)" as image to create. Select your SD card and wait until the imager is done.
 
-Put the SD card in your Pi and turn it on.  After a quick automatic reboot the pi is ready for use. 
+Put the SD card in your Pi and turn it on.  After a quick automatic reboot the pi is ready for use.
 
 ## Pi doorbell scripts
 Install the workshop software by opening a terminal on the Pi and clone this repositry to your own local system with :
@@ -58,29 +34,53 @@ copy 'config.py.example' to 'config.py' with the 'cp' command :
 `cp config.py.example config.py`
 
 
-## Change config.py 
-Fill in the parameters you got in the steps from telegram. For the jitsi change the url   part 'your_channel' to your own variation.
+## Change config.py
+Fill in the parameters you got in the steps from telegram.
 
-telegram_token - bot API token
-telegram_chat - channel id of channel of the door
+telegram_token - Telegram bot API token
+telegram_chat - Telegram channel id
+userid - Your Pi's (home directory) name
+url - For the jitsi change the url part 'your_channel' to your own variation
 
 ## modify home directiory in scripts
 In the script 'doorbell.py' and 'doorbell.desktop' you have to fill in your own home directory if you user name is different then 'pi'. Look for '/home/pi' and replace 'pi' with your own user name.
 
+## Setup Telegram
+
+We use telegram messages to give you realtime update that someone is at the door.
+
+First create a new private telegram channel where you want to receive the door notifications. If you want to hear updates enable (sound) notifications for this channel.
+
+### Get your API Token
+
+Get your personal bot token via these [steps](https://core.telegram.org/bots/features#creating-a-new-bot) and save the bot token.
+
+Add you telegram bot as an admin to your channel.
+
+### Channel ID
+
+Type and send something in your new channel.
+Then, navigate in your webbrowser to the following url: https://api.telegram.org/bot<token>/getUpdates . Replace <token> with your bot token.
+You should see some JSON-related information about your bot, including your sent message. Listed under 'chat', there is a variable called 'id' with a long number with a dash in front of it. This is your channel id, including the dash.
+
+We included a 'test_telegram.py' script to test and find the right channel number. Edit config.py first to include your bot token.
+
 # GPIO header pins
 
-We use the header to add some additional hardware to the pi. See [Raspberry documentation](https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#gpio) for more informations about the Pi GPIO header pins. 
+We use the header to add some additional hardware to the pi. See [Raspberry documentation](https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#gpio) for more informations about the Pi GPIO header pins.
 
 ## LED
 
 - Pin 6 - GND
 - Pin 8 - GPIO14
 
-
 ## Button
 
 - Pin 37 - GPIO26
 - Pin 39 - GND
+
+## Camera
+You use the flex cable to connect your camera to your pi, follow the instructions on their site. The rasberry pi automatically recognises this.
 
 ## Testing if everyting is connected
 
@@ -105,13 +105,13 @@ Create the autostart directory this will not exist on a new system.
 
 In the 'doorbell.desktop' change the paths to the directory where to script is. Move file 'doorbell.desktop' to ~.config/autostart/
 
-`mv doorbell.desktop ~.config/autostart/`
+`mv doorbell.desktop ~/.config/autostart/`
 
-In the 'doorbell.desktop' is a path to your homedirectory. Default we asume this is user 'pi', if this is diferent change it accordingly.
+In the 'doorbell.desktop' is a path to your homedirectory. Default we assume this is user 'pi', if this is diferent, change it accordingly.
 
-Reboot the pi and wait until its fully booted. Pres the button and enjoy your own DIY smart doorbell.
+Reboot the pi and wait until its fully booted. press the button and enjoy your own DIY smart doorbell.
 
-# Commen mistakes 
+# Common mistakes
 
 If you can't hear sound probaly your volume is to low. You can change this via desktop upper right speaker symbol.  Alternative you can use the 'alsamixer' command.
 
@@ -123,7 +123,6 @@ Instead of a USB sound card you can use - Adafruit STEMMA Speaker (ada3885) and 
 - Pin 6 - GND
 - Pin 4 - +5V
 - Pin 12 - GPIO18 / signal
-
 
 ## Change boot/firmware/config.txt
 
